@@ -277,7 +277,7 @@ function ApplePickingCard(props: any) {
       </div>
       <div className="flex">
         <div className='flex-1 flex items-center justify-center'>
-          <Image src="/apple-farm.webp" alt="De apple farm" width={250} height={250} />
+          <Image priority src="/apple-farm.webp" alt="De apple farm" width={250} height={250} />
         </div>
         <div className='flex-1 flex items-center justify-center'>
           <Image src="/apple.svg" alt="De apple farm" width={250} height={250} />
@@ -331,10 +331,10 @@ function JazzCard(props: any) {
       </div>
       <div className="flex">
         <div className='flex-1 flex items-center justify-center'>
-          <Image className="rounded" src="/stephane.jpg" alt="Bonare" width={250} height={250} />
+          <Image priority className="rounded" src="/stephane.jpg" alt="Bonare" width={250} height={250} />
         </div>
         <div className='flex-1 flex items-center justify-center'>
-          <Image className="rounded" src="/django.jpg" alt="Bonare" width={100} height={100} />
+          <Image priority className="rounded" src="/django.jpg" alt="Bonare" width={100} height={100} />
         </div>
       </div>
       <div className='py-4 flex justify-center text-center'>
@@ -358,7 +358,7 @@ function Randomn(props: any) {
         </h1>
       </div>
       <div className="flex justify-center">
-        <Image className="rounded" src="/lewis.jpg" alt="Bonare" width={250} height={250} />
+        <Image priority className="rounded" src="/lewis.jpg" alt="Bonare" width={250} height={250} />
       </div>
       <div className='text-center'>
         Excellent
@@ -379,10 +379,10 @@ function RedFlag(props: any) {
       </div>
       <div className="flex">
         <div className='flex-1 flex items-center justify-center'>
-          <Image src="/redflag.svg" alt="Bonare" width={250} height={250} />
+          <Image priority src="/redflag.svg" alt="Bonare" width={250} height={250} />
         </div>
         <div className='flex-1 flex items-center justify-center'>
-          <Image src="/simp-pic.png" alt="Bonare" width={250} height={250} />
+          <Image priority src="/simp-pic.png" alt="Bonare" width={250} height={250} />
         </div>
       </div>
       <div className='py-4 flex justify-center text-center'>
@@ -575,6 +575,7 @@ export default function Home() {
         if (selected == 4) {
           alert('ERROR #E42332. Looks like there is a bug. Need more time to look into this one')
           setIsClicked(false)
+
         }
       }
     }
