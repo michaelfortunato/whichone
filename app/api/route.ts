@@ -5,7 +5,6 @@ import 'dotenv/config';
 const sid = process.env.TWILIO_SID;
 const tok = process.env.TWILIO_TOKEN;
 
-export async function GET(request: NextApiRequest) { }
 
 
 export async function POST(request: NextApiRequest) {
