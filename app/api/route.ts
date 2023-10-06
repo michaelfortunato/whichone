@@ -9,6 +9,7 @@ export async function GET(request: NextApiRequest) { }
 
 
 export async function POST(request: NextApiRequest) {
+  console.log("Ok")
   /* TODO: Uncomment before push
   client(sid, tok).messages.create({
     from: "+18445861101",
