@@ -1,4 +1,3 @@
-import type { NextApiRequest, NextApiResponse } from "next";
 import client from 'twilio';
 import 'dotenv/config';
 
@@ -7,7 +6,7 @@ const tok = process.env.TWILIO_TOKEN;
 
 
 
-export async function POST(request: NextApiRequest) {
+export async function POST(request: Request) {
   console.log("Ok")
   /* TODO: Uncomment before push
   client(sid, tok).messages.create({
