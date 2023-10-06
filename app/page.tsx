@@ -598,10 +598,10 @@ export default function Home() {
             You scroll to the place you want to go together next
           </p>
           <p className="font-sans text-base text-center text-black p-2">
-            You hit the gavel
+            You smash the gavel
           </p>
           <p className="font-sans text-base text-center text-black p-2">
-            I get a text which tells me what you chose.
+            The app then texts me saying where you want to go
           </p>
         </div>
       </div>
