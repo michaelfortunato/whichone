@@ -548,8 +548,12 @@ export default function Home() {
   const [selected, setSelected] = useState(0);
   const [clickDirection, setClickDirection] = useState<string | null>(null);
   const handleGavel = async () => {
-    setIsClicked(!isClicked)  // Toggle le gavel
-    // TODO: Make API request so I get the cell phone ping
+    if (selected == 4) {
+      alert('error #e42332. looks like there is a bug. need more time to look into this one')
+      setIsClicked(false)
+    } else {
+      setIsClicked(!isClicked)  // Toggle le gavel
+    }
   }
 
   const handleLeftClick = () => {
@@ -572,11 +576,6 @@ export default function Home() {
     const pingMichael = async () => {
       if (isClicked) {
         const res = await fetch('/api', { method: "POST", body: JSON.stringify({ "type": ActivityIdToText(selected) }) })
-        if (selected == 4) {
-          alert('ERROR #E42332. Looks like there is a bug. Need more time to look into this one')
-          setIsClicked(false)
-
-        }
       }
     }
     pingMichael()
@@ -588,7 +587,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col lg:p-24 overflow-hidden">
       <div className="flex flex-col items-center justify-center gap-4">
-        {(isClicked && selected != 4) && <div className='absolute'><ConfettiExplosion /></div>}
+        {isClicked && <div className='absolute'><ConfettiExplosion /></div>}
         <div className='flex-initial'>
           <h1 className="font-sans text-2xl text-black p-2">
             How does this work?
