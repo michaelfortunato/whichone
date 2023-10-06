@@ -1,6 +1,7 @@
+/* eslint-disable react/no-unescaped-entities */
 'use client'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import ConfettiExplosion from 'react-confetti-explosion'
 
@@ -258,8 +259,16 @@ const GavelAni = (props: any) => (
 
 
 
-function ApplePickingCard() {
-  return (<div className='rounded-md shadow-md bg-white container-md min-w-full text-black pl-4 '>
+function ApplePickingCard(props: any) {
+  console.log(props.clickDirection)
+  return (<motion.div className='rounded-md shadow-md bg-white container-md min-w-full text-black pl-4 '
+
+    initial={props.clickDirection == 'right' && { x: "100vw" } || props.clickDirection == 'left' && { x: "-100vw" }}
+    animate={{ x: 0 }}
+    exit={props.clickDirection == 'right' ? { x: "100vw" } : { x: "-100vw" }}
+
+
+  >
     <div className='flex flex-col gap-4 p-4'>
       <div className='flex justify-center items-center'>
         <h1 className="text-2xl">
@@ -274,24 +283,69 @@ function ApplePickingCard() {
           <Image src="/apple.svg" alt="De apple farm" width={250} height={250} />
         </div>
       </div>
-      <div className='py-4 flex justify-center'>
-        <p>Now this place has it going <a target="_blank" className="inline text-red-500" href="https://www.lookoutfarm.com">on.</a>
-          {' '}That's what I'm talking about.</p>
+      <div className='py-4 flex justify-center text-center'>
+        <p>Now this place has it going <a target="_blank" className="inline text-red-500" href="https://www.lookoutfarm.com">on.</a></p>
       </div>
     </div>
-  </div>)
+  </motion.div>)
 }
-function CookingCard() {
-  return (<div className='rounded-md shadow-md bg-white container-md min-w-full text-black'>
-    Cooking
-  </div>)
+function CookingCard(props: any) {
+  return (<motion.div className='rounded-md shadow-md bg-white container-md min-w-full text-black'
+    initial={props.clickDirection == 'right' && { x: "100vw" } || props.clickDirection == 'left' && { x: "-100vw" }}
+    animate={{ x: 0 }}
+    exit={props.clickDirection == 'right' ? { x: "-100vw" } : { x: "100vw" }}
+  >
+    <div className='flex flex-col gap-4 p-4'>
+      <div className='flex justify-center items-center'>
+        <h1 className="text-2xl">
+          Cooking Class
+        </h1>
+      </div>
+      <div className="flex">
+        <div className='flex-1 flex items-center justify-center'>
+          <Image src="/pizza.svg" alt="Bonare" width={250} height={250} />
+        </div>
+        <div className='flex-1 flex items-center justify-center'>
+          <Image src="/pizza.svg" alt="Bonare" width={250} height={250} />
+        </div>
+      </div>
+      <div className='py-4 flex justify-center text-center'>
+        <p>This is actually true. I tried to boil brocolli last night. So I put the brocolli in a cup of cold water and then put that on the stove. Alot of it burned. This place looks cool <a target="_blank" className="inline text-red-500" href="https://www.eataly.com/us_en/chef-s-workshop-fresh-egg-pasta-2023-10-13-14739">though.</a>
+        </p>
+      </div>
+    </div>
+  </motion.div>)
 }
 
-function JazzCard() {
-  return (<div className='rounded-md shadow-md bg-white container-md min-w-full text-black'>
-    Cooking
-  </div>)
+function JazzCard(props: any) {
+  return (<motion.div className='rounded-md shadow-md bg-white container-md min-w-full text-black'
+    initial={props.clickDirection == 'right' && { x: "100vw" } || props.clickDirection == 'left' && { x: "-100vw" }}
+    animate={{ x: 0 }}
+    exit={props.clickDirection == 'right' ? { x: "-100vw" } : { x: "100vw" }}
+  >
+    Jazz
+  </motion.div>)
+}
 
+function Randomn(props: any) {
+  return (<motion.div className='rounded-md shadow-md bg-white container-md min-w-full text-black'
+    initial={props.clickDirection == 'right' && { x: "100vw" } || props.clickDirection == 'left' && { x: "-100vw" }}
+    animate={{ x: 0 }}
+    exit={props.clickDirection == 'right' ? { x: "-100vw" } : { x: "100vw" }}
+  >
+    Random
+  </motion.div>)
+}
+
+function RedFlag(props: any) {
+  return (<motion.div className='rounded-md shadow-md bg-white container-md min-w-full text-black'
+    initial={props.clickDirection == 'right' && { x: "100vw" } || props.clickDirection == 'left' && { x: "-100vw" }}
+    animate={{ x: 0 }}
+    exit={props.clickDirection == 'right' ? { x: "-100vw" } : { x: "100vw" }}
+  >
+
+    Red Flag
+  </motion.div>)
 }
 
 
@@ -428,40 +482,64 @@ function RightArrow() {
     </svg >)
 }
 
+function ActivityIdToText(id: number) {
+  switch (id) {
+    case 0:
+      return 'Apple Picking'
+    case 1:
+      return 'Cooking Class'
+    case 2:
+      return 'Jazz'
+    case 3:
+      return 'Miscellaneous'
+    case 4:
+      return 'Red Flag'
+    default:
+      return 'Error'
+  }
+}
+
 export default function Home() {
   const [isClicked, setIsClicked] = useState(false);
   const [selected, setSelected] = useState(0);
+  const [clickDirection, setClickDirection] = useState<string | null>(null);
   const handleGavel = async () => {
     setIsClicked(!isClicked)  // Toggle le gavel
     // TODO: Make API request so I get the cell phone ping
   }
 
   const handleLeftClick = () => {
-
-
+    if (selected == 0) {
+      return;
+    }
+    setClickDirection('left')
+    setSelected(selected - 1)
   }
 
   const handleRightClick = () => {
-
-
+    if (selected == 4) {
+      return;
+    }
+    setClickDirection('right')
+    setSelected(selected + 1)
   }
 
   useEffect(() => {
     const pingMichael = async () => {
       if (isClicked) {
-        const res = await fetch('/api', { method: "POST" })
+        const res = await fetch('/api', { method: "POST", body: JSON.stringify({ "type": ActivityIdToText(selected) }) })
       }
     }
     pingMichael()
 
-  }, [isClicked])
+  }, [isClicked, selected])
 
 
 
   return (
-    <main className="flex min-h-screen flex-col lg:p-24">
-      {isClicked && <ConfettiExplosion />}
+    <main className="flex min-h-screen flex-col lg:p-24 overflow-hidden">
       <div className="flex flex-col items-center justify-center gap-4">
+        {isClicked && <div className='absolute'><ConfettiExplosion /></div>}
         <div className='flex-initial'>
           <h1 className="font-sans text-2xl text-black">
             How does this work?
@@ -482,21 +560,23 @@ export default function Home() {
       <div className='flex flex-1 flex-col'>
         <div className='flex-1 flex items-center'>
           <div className='flex-1 flex justify-center'>
-            <div className='hover:cursor-pointer text-black' onClick={handleLeftClick}>
+            <div className={'hover:cursor-pointer text-black' + (selected == 0 ? " opacity-25 hover:cursor-auto" : "")} onClick={handleLeftClick}>
               <LeftArrow />
             </div>
           </div>
-          <div className='flex-auto'>
-            <ApplePickingCard />
+          <div className='flex-[3]'>
+            <AnimatePresence mode='wait'>
+              {selected == 0 && <ApplePickingCard key={0} clickDirection={clickDirection} /> || selected == 1 && <CookingCard key={1} clickDirection={clickDirection} /> || selected == 2 && <JazzCard key={2} clickDirection={clickDirection} /> || selected == 3 && <Randomn key={3} clickDirection={clickDirection} /> || selected == 4 && <RedFlag key={4} clickDirection={clickDirection} />}
+            </AnimatePresence>
           </div>
           <div className='flex-1 flex justify-center'>
-            <div className='hover:cursor-pointer text-black' onClick={handleRightClick}>
+            <div className={'hover:cursor-pointer text-black' + (selected == 4 ? " opacity-25 hover:cursor-auto" : "")} onClick={handleRightClick}>
               <RightArrow />
             </div>
           </div>
         </div>
-        <div className='flex-initial'>
-          <Gavel className="hover:cursor-pointer" onClick={handleGavel} height={500} width={500} isClicked={isClicked} />
+        <div className='flex-initial flex justify-center'>
+          <Gavel className="hover:cursor-pointer" onClick={handleGavel} height={350} width={350} isClicked={isClicked} />
         </div>
       </div>
     </main>
