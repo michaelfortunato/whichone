@@ -323,7 +323,25 @@ function JazzCard(props: any) {
     animate={{ x: 0 }}
     exit={props.clickDirection == 'right' ? { x: "-100vw" } : { x: "100vw" }}
   >
-    Jazz
+    <div className='flex flex-col gap-4 p-4'>
+      <div className='flex justify-center items-center'>
+        <h1 className="text-2xl">
+          Jazz Club
+        </h1>
+      </div>
+      <div className="flex">
+        <div className='flex-1 flex items-center justify-center'>
+          <Image className="rounded" src="/stephane.jpg" alt="Bonare" width={250} height={250} />
+        </div>
+        <div className='flex-1 flex items-center justify-center'>
+          <Image className="rounded" src="/django.jpg" alt="Bonare" width={100} height={100} />
+        </div>
+      </div>
+      <div className='py-4 flex justify-center text-center'>
+        <p>Go to a jazz bar and have a smoke afterwards? Most certainly<a target="_blank" className="inline text-red-500" href="https://www.eataly.com/us_en/chef-s-workshop-fresh-egg-pasta-2023-10-13-14739"></a>
+        </p>
+      </div>
+    </div>
   </motion.div>)
 }
 
@@ -333,7 +351,19 @@ function Randomn(props: any) {
     animate={{ x: 0 }}
     exit={props.clickDirection == 'right' ? { x: "-100vw" } : { x: "100vw" }}
   >
-    Random
+    <div className='flex flex-col gap-4 p-4 min-h-[16]'>
+      <div className='flex justify-center items-center'>
+        <h1 className="text-2xl">
+          ??
+        </h1>
+      </div>
+      <div className="flex justify-center">
+        <Image className="rounded" src="/lewis.jpg" alt="Bonare" width={250} height={250} />
+      </div>
+      <div className='text-center'>
+        Excellent
+      </div>
+    </div>
   </motion.div>)
 }
 
@@ -343,8 +373,22 @@ function RedFlag(props: any) {
     animate={{ x: 0 }}
     exit={props.clickDirection == 'right' ? { x: "-100vw" } : { x: "100vw" }}
   >
-
-    Red Flag
+    <div className='flex flex-col gap-4 p-4'>
+      <div className='flex justify-center items-center'>
+        Red Flag
+      </div>
+      <div className="flex">
+        <div className='flex-1 flex items-center justify-center'>
+          <Image src="/redflag.svg" alt="Bonare" width={250} height={250} />
+        </div>
+        <div className='flex-1 flex items-center justify-center'>
+          <Image src="/simp-pic.png" alt="Bonare" width={250} height={250} />
+        </div>
+      </div>
+      <div className='py-4 flex justify-center text-center'>
+        <p>Too much? No Problem. Hit that gavel and let the author know!</p>
+      </div>
+    </div>
   </motion.div>)
 }
 
@@ -528,6 +572,10 @@ export default function Home() {
     const pingMichael = async () => {
       if (isClicked) {
         const res = await fetch('/api', { method: "POST", body: JSON.stringify({ "type": ActivityIdToText(selected) }) })
+        if (selected == 4) {
+          alert('ERROR #E42332. Looks like there is a bug. Need more time to look into this one')
+          setIsClicked(false)
+        }
       }
     }
     pingMichael()
@@ -539,21 +587,21 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col lg:p-24 overflow-hidden">
       <div className="flex flex-col items-center justify-center gap-4">
-        {isClicked && <div className='absolute'><ConfettiExplosion /></div>}
+        {(isClicked && selected != 4) && <div className='absolute'><ConfettiExplosion /></div>}
         <div className='flex-initial'>
-          <h1 className="font-sans text-2xl text-black">
+          <h1 className="font-sans text-2xl text-black p-2">
             How does this work?
           </h1>
         </div>
         <div className='flex-initial'>
-          <p className="font-sans text-base text-center text-black">
+          <p className="font-sans text-base text-center text-black p-2">
             You scroll to the place you want to go together next
           </p>
-          <p className="font-sans text-base text-center text-black">
+          <p className="font-sans text-base text-center text-black p-2">
             You hit the gavel
           </p>
-          <p className="font-sans text-base text-center text-black">
-            I get a text which tells me what you choose
+          <p className="font-sans text-base text-center text-black p-2">
+            I get a text which tells me what you chose.
           </p>
         </div>
       </div>
