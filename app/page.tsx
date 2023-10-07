@@ -387,7 +387,7 @@ function RedFlag(props: any) {
         </div>
       </div>
       <div className='py-4 flex justify-center text-center'>
-        <p>Too much? No Problem. Hit that gavel and let the author know!</p>
+        <p>Too much? No Problem. Hit that gavel and let the me know!</p>
       </div>
     </div>
   </motion.div>)
@@ -631,8 +631,7 @@ export default function Home() {
       </div>
       {confettiOver &&
         <div className='absolute text-black float-right'>
-          Boink
-          om       </div>
+          Boom :)</div>
       }
     </main>
   )
