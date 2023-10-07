@@ -310,7 +310,8 @@ function CookingCard(props: any) {
         </div>
       </div>
       <div className='py-4 flex justify-center text-center'>
-        <p>This is actually true. I tried to boil brocolli last night. So I put the brocolli in a cup of cold water and then put that on the stove. Alot of it burned. This place looks cool <a target="_blank" className="inline text-red-500" href="https://www.eataly.com/us_en/chef-s-workshop-fresh-egg-pasta-2023-10-13-14739">though.</a>
+        <p>This is actually true. I tried to boil brocolli tonight. So I put the brocolli in a cup of cold water and then put that on the stove. Alot of it burned. Pain in the ass. This place looks cool <a target="_blank" className="inline text-red-500" href="https://www.eataly.com/us_en/chef-s-workshop-fresh-egg-pasta-2023-10-13-14739">though.</a>
+          {' '}Alright website's all done I'm calling it.
         </p>
       </div>
     </div>
@@ -338,7 +339,7 @@ function JazzCard(props: any) {
         </div>
       </div>
       <div className='py-4 flex justify-center text-center'>
-        <p>Go to a jazz bar and have a smoke afterwards? Most certainly<a target="_blank" className="inline text-red-500" href="https://www.eataly.com/us_en/chef-s-workshop-fresh-egg-pasta-2023-10-13-14739"></a>
+        <p>Go to a jazz bar? Most certainly<a target="_blank" className="inline text-red-500" href="https://www.eataly.com/us_en/chef-s-workshop-fresh-egg-pasta-2023-10-13-14739"></a>
         </p>
       </div>
     </div>
@@ -375,7 +376,7 @@ function RedFlag(props: any) {
   >
     <div className='flex flex-col gap-4 p-4'>
       <div className='flex justify-center items-center'>
-        Red Flag
+
       </div>
       <div className="flex">
         <div className='flex-1 flex items-center justify-center'>
@@ -535,8 +536,6 @@ function ActivityIdToText(id: number) {
     case 2:
       return 'Jazz'
     case 3:
-      return 'Miscellaneous'
-    case 4:
       return 'Red Flag'
     default:
       return 'Error'
@@ -547,9 +546,10 @@ export default function Home() {
   const [isClicked, setIsClicked] = useState(false);
   const [selected, setSelected] = useState(0);
   const [clickDirection, setClickDirection] = useState<string | null>(null);
+  const [confettiOver, setConfettiOver] = useState(false);
   const handleGavel = async () => {
-    if (selected == 4) {
-      alert('error #e42332. looks like there is a bug. need more time to look into this one')
+    if (selected == 3) {
+      alert('ERROR #42332. Invalid operation.')
       setIsClicked(false)
     } else {
       setIsClicked(!isClicked)  // Toggle le gavel
@@ -565,7 +565,7 @@ export default function Home() {
   }
 
   const handleRightClick = () => {
-    if (selected == 4) {
+    if (selected == 3) {
       return;
     }
     setClickDirection('right')
@@ -579,30 +579,32 @@ export default function Home() {
       }
     }
     pingMichael()
+    setConfettiOver(false)
 
   }, [isClicked, selected])
+
 
 
 
   return (
     <main className="flex min-h-screen flex-col lg:p-24 overflow-hidden">
       <div className="flex flex-col items-center justify-center gap-4">
-        {isClicked && <div className='absolute'><ConfettiExplosion /></div>}
+        {isClicked && <div className='absolute'><ConfettiExplosion onComplete={() => setConfettiOver(true)} /></div>}
         <div className='flex-initial'>
           <h1 className="font-sans text-2xl text-black p-2">
             How does this work?
           </h1>
         </div>
         <div className='flex-initial'>
-          <p className="font-sans text-base text-center text-black p-2">
+          <motion.p initial={{ x: "50vh" }} animate={{ x: 0 }} className="font-sans text-base text-center text-black p-2">
             You scroll to the place you want to go together next
-          </p>
-          <p className="font-sans text-base text-center text-black p-2">
-            You smash the gavel
-          </p>
-          <p className="font-sans text-base text-center text-black p-2">
+          </motion.p>
+          <motion.p initial={{ x: "50vh" }} animate={{ x: 0 }} transition={{ delay: .60 }} className="font-sans text-base text-center text-black p-2">
+            You smash that gavel
+          </motion.p>
+          <motion.p initial={{ x: "50vh" }} animate={{ x: 0 }} transition={{ delay: 1.2 }} className="font-sans text-base text-center text-black p-2">
             The app then texts me saying where you want to go
-          </p>
+          </motion.p>
         </div>
       </div>
       <div className='flex flex-1 flex-col'>
@@ -614,7 +616,7 @@ export default function Home() {
           </div>
           <div className='flex-[3]'>
             <AnimatePresence mode='wait'>
-              {selected == 0 && <ApplePickingCard key={0} clickDirection={clickDirection} /> || selected == 1 && <CookingCard key={1} clickDirection={clickDirection} /> || selected == 2 && <JazzCard key={2} clickDirection={clickDirection} /> || selected == 3 && <Randomn key={3} clickDirection={clickDirection} /> || selected == 4 && <RedFlag key={4} clickDirection={clickDirection} />}
+              {selected == 0 && <ApplePickingCard key={0} clickDirection={clickDirection} /> || selected == 1 && <CookingCard key={1} clickDirection={clickDirection} /> || selected == 2 && <JazzCard key={2} clickDirection={clickDirection} /> || selected == 3 && <RedFlag key={3} clickDirection={clickDirection} />}
             </AnimatePresence>
           </div>
           <div className='flex-1 flex justify-center'>
@@ -627,6 +629,11 @@ export default function Home() {
           <Gavel className="hover:cursor-pointer" onClick={handleGavel} height={350} width={350} isClicked={isClicked} />
         </div>
       </div>
+      {confettiOver &&
+        <div className='absolute text-black float-right'>
+          Boink
+          om       </div>
+      }
     </main>
   )
 }
