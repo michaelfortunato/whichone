@@ -603,7 +603,7 @@ export default function Home() {
             You smash that gavel
           </motion.p>
           <motion.p initial={{ x: "50vh" }} animate={{ x: 0 }} transition={{ delay: 1.2 }} className="font-sans text-base text-center text-black p-2">
-            The app then texts me saying where you want to go
+            The app then texts me saying where you want to go :)
           </motion.p>
         </div>
       </div>
