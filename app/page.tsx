@@ -387,7 +387,7 @@ function RedFlag(props: any) {
         </div>
       </div>
       <div className='py-4 flex justify-center text-center'>
-        <p>Too much? No Problem. Hit that gavel and let the me know!</p>
+        <p>Too much? No Problem. Hit that gavel and let me know!</p>
       </div>
     </div>
   </motion.div>)
